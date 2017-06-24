@@ -33,27 +33,32 @@ function worm_game () {
  }
 
  function moveUp(){
-   wormHead.splice(0, 1, (wormHead[0] - 1));
+  //change wormHead x coord so long as we don't go lower than 0 ( no - 1)
+   wormHead.splice(0, 1, Math.max(wormHead[0] - 1, 0));
    renderCanvas()
-   console.log(canvas)  
+  
+   console.log(wormHead)  
  }
 
  function moveRight(){
-   wormHead.splice(1, 1, (wormHead[1] + 1));
-   renderCanvas()  
-   console.log(canvas)
+  //change wormHead y coord so long as it doesn't exceed the length of a canvas array
+  wormHead.splice(1, 1, Math.min(wormHead[1] + 1, canvas[0].length - 1));
+  renderCanvas() 
+  console.log(wormHead)
  }
 
  function moveDown(){
-   wormHead.splice(0, 1, (wormHead[0] + 1));
+  //change wormHead x coord so long as it doesn't exceed the length of canvas
+   wormHead.splice(0, 1, Math.min(wormHead[0] + 1, canvas.length - 1));
    renderCanvas()
-   console.log(canvas)  
+   console.log(wormHead)  
  }
 
  function moveLeft(){
-   wormHead.splice(1, 1, (wormHead[1] - 1));
+  //change wormHead x coord so long as we don't go lower than 0 ( no -1 )
+   wormHead.splice(1, 1, Math.max(wormHead[1] - 1, 0));
    renderCanvas()
-   console.log(canvas)  
+   console.log(wormHead)  
  }
 
  return {
@@ -93,5 +98,4 @@ $(document).keydown(function(e) {
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });
 
-alert('hey')
 
