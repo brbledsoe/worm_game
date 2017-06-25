@@ -1,6 +1,4 @@
-function worm_game () {
-
- var canvas = [
+var canvas = [
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -107,35 +105,27 @@ function worm_game () {
    renderCanvas()
  }
 
- return {
-  renderCanvas: renderCanvas,
-  moveUp: moveUp,
-  moveRight: moveRight,
-  moveDown: moveDown,
-  moveLeft: moveLeft
- }
-}
+
 
 //new game
-var app = worm_game();
-app.renderCanvas()
+renderCanvas()
 
 $(document).keydown(function(e) {
   switch(e.which) {
    case 37: // left
-   app.moveLeft();
+   moveLeft();
    break;
 
    case 38: // up
-   app.moveUp();
+   moveUp();
    break;
 
    case 39: // right
-   app.moveRight();
+   moveRight();
    break;
 
    case 40: // down
-   app.moveDown();
+   moveDown();
    break;
 
    default: return; // exit this handler for other keys
