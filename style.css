@@ -4,13 +4,13 @@
 }
 
 .canvas_col{
-  width: 75px;
-  height: 75px;
   float: left;
-  border: 1px solid black;
 }
 
-.canvas{
+.canvas_col_tile{
+  border: 1px solid black;
+  padding-top: 100%;
+  width: 100%; 
 }
 
 .red{
