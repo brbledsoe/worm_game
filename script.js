@@ -39,13 +39,13 @@ var canvas = [
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
  ];
  
  //x y coordinate of worm head
- var snakeHead = [0, 0];
+var snakeHead = [0, 0];
+var direction = 'right';
 
- function renderCanvas () {
+function renderCanvas () {
 
    //empty the current canvas div
    $('.canvas').empty();
@@ -80,10 +80,9 @@ var canvas = [
        }
      }
    }
- }
+}
 
-
- function moveUp(){
+function moveUp(){
   var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
@@ -92,23 +91,26 @@ var canvas = [
 
   var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
-  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
-   
- }
+  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');   
 
- function moveRight(){
+  direction = 'up';
+}
+
+function moveRight(){
   var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
   //change snakeHead y coord so long as it doesn't exceed the length of a canvas array
-  snakeHead.splice(1, 1, Math.min(snakeHead[1] + 1, canvas[0].length - 1));
+  snakeHead.splice(1, 1, Math.min(snakeHead[1] + 1, canvas[0].length));
 
   var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
- }
 
- function moveDown(){
+  direction = 'right';
+}
+
+function moveDown(){
   var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
@@ -118,22 +120,42 @@ var canvas = [
   var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
- }
 
- function moveLeft(){
+  direction = 'down';
+}
+
+function moveLeft(){
   var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
   //change snakeHead x coord so long as we don't go lower than 0 ( no -1 )
-   snakeHead.splice(1, 1, Math.max(snakeHead[1] - 1, 0));
+   snakeHead.splice(1, 1, Math.max(snakeHead[1] - 1, 1));
 
   var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
   var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
   $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
+
+  direction = 'left';
    
- }
+}
 
+setInterval(function(){
+  if(direction === 'up'){
+    moveUp();
+  }
 
+  if(direction === 'right'){
+    moveRight();
+  }
+
+  if(direction === 'down'){
+    moveDown();
+  }
+
+  if(direction === 'left'){
+    moveLeft();
+  }
+}, 1000)
 
 //new game
 renderCanvas()
