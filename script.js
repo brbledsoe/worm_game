@@ -43,18 +43,19 @@ var canvas = [
  ];
  
  //x y coordinate of worm head
- var wormHead = [0, 0];
+ var snakeHead = [0, 0];
 
  function renderCanvas () {
 
    //empty the current canvas div
    $('.canvas').empty();
-   //size of columns 
+   //width of columns is length of array divided by 100% width
    var col_width = 100/canvas[0].length;
 
    console.log('------- oh hey its a col width -------')
    console.log(col_width)
-   console.log('--------------------------------------')
+   console.log('------- oh hey its the snakeHead location -------')
+   console.log(snakeHead)
 
    //append rows
    for(var i = 0; i < canvas.length; i++){
@@ -63,8 +64,8 @@ var canvas = [
      //append columns
      for(var j = 0; j < canvas[i].length; j++){
 
-      //if [i][j] on wormHead x y add a div with red background else reg div
-       if(i === wormHead[0] && j === wormHead[1]){
+      //if [i][j] on snakeHead x y add a div with red background else reg div
+       if(i === snakeHead[0] && j === snakeHead[1]){
          $('.canvas_row_' + i).append(
             '<div class="canvas_col" style="width:' + col_width + '%;">'+ 
                '<div class="canvas_col_tile red"></div>' +
@@ -81,28 +82,55 @@ var canvas = [
    }
  }
 
+
  function moveUp(){
-  //change wormHead x coord so long as we don't go lower than 0 ( no - 1)
-   wormHead.splice(0, 1, Math.max(wormHead[0] - 1, 0));
-   renderCanvas()
+  var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
+  //change snakeHead x coord so long as we don't go lower than 0 ( no - 1)
+   snakeHead.splice(0, 1, Math.max(snakeHead[0] - 1, 0));
+
+  var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
+   
  }
 
  function moveRight(){
-  //change wormHead y coord so long as it doesn't exceed the length of a canvas array
-  wormHead.splice(1, 1, Math.min(wormHead[1] + 1, canvas[0].length - 1));
-  renderCanvas() 
+  var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
+  //change snakeHead y coord so long as it doesn't exceed the length of a canvas array
+  snakeHead.splice(1, 1, Math.min(snakeHead[1] + 1, canvas[0].length - 1));
+
+  var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
  }
 
  function moveDown(){
-  //change wormHead x coord so long as it doesn't exceed the length of canvas
-   wormHead.splice(0, 1, Math.min(wormHead[0] + 1, canvas.length - 1));
-   renderCanvas()
+  var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
+  //change snakeHead x coord so long as it doesn't exceed the length of canvas
+   snakeHead.splice(0, 1, Math.min(snakeHead[0] + 1, canvas.length - 1));
+
+  var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
  }
 
  function moveLeft(){
-  //change wormHead x coord so long as we don't go lower than 0 ( no -1 )
-   wormHead.splice(1, 1, Math.max(wormHead[1] - 1, 0));
-   renderCanvas()
+  var previousSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var previousSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( previousSnakeHeadRow + previousSnakeHeadCol).removeClass('red');
+  //change snakeHead x coord so long as we don't go lower than 0 ( no -1 )
+   snakeHead.splice(1, 1, Math.max(snakeHead[1] - 1, 0));
+
+  var nextSnakeHeadRow = '.canvas_row_' + snakeHead[0]
+  var nextSnakeHeadCol = ' .canvas_col:nth-child(' + snakeHead[1] +  ') .canvas_col_tile';
+  $( nextSnakeHeadRow + nextSnakeHeadCol).addClass('red');
+   
  }
 
 
