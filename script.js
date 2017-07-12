@@ -20,13 +20,15 @@ function renderCanvas() {
 
         //append columns
         for (var j = 0; j < canvasColLength; j++) {
-            //if on snakeHead x,y coordinates add snakeHeadClass
+            //if i & j on x & y coordinates of snakeHead, add snakeHeadClass, else nothing
             var snakeHeadClass = (i === snakeHeadY && j === snakeHeadX) ? 'red' : '';
 
+            //canvas col to add
             var canvasCol = '<div class="canvas_col canvas_col_' + j + '" style="width:' + col_width + '%;">' +
                 '<div class="canvas_col_tile ' + snakeHeadClass +'"></div>' +
                 '</div>'
 
+            //append canvas col to current canvasRow
             $('.canvas_row_' + i).append(canvasCol);
 
         }
@@ -102,6 +104,9 @@ function moveLeft() {
     direction = 'left';
 }
 
+//new game
+renderCanvas()
+
 setInterval(function() {
     if (direction === 'up') {
         moveUp();
@@ -119,9 +124,6 @@ setInterval(function() {
         moveLeft();
     }
 }, 1000)
-
-//new game
-renderCanvas()
 
 $(document).keydown(function(e) {
     switch (e.which) {
@@ -147,3 +149,5 @@ $(document).keydown(function(e) {
 
     e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+
