@@ -16,7 +16,7 @@ function renderCanvas() {
     for (var i = 0; i < canvasRows * canvasTilesPerRow; i++) {
         var snakeHeadClass = (i === 0) ? 'red' : '';
 
-        $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
+        $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '" data-id="' + i + '"></div>');
     }
 
 }
@@ -24,12 +24,12 @@ function renderCanvas() {
 
 function moveUp() {
   //get current snakeHead div's id
-  var $currentDiv = $("div.red")["0"].id;
+  var $currentDiv = $("div.red");
   //create next snakeHead div's id
-  var $nextDiv = "#" + (parseInt($currentDiv) - canvasTilesPerRow);
+  var $nextDiv = "#" + ($currentDiv.data().id - canvasTilesPerRow);
 
   //remove current snakeHead div's red class
-  $('#' + $currentDiv).removeClass('red');
+  $($currentDiv).removeClass('red');
   //add red class to next snakeHead div
   $($nextDiv).addClass('red');
   
@@ -39,12 +39,12 @@ function moveUp() {
 
 function moveRight() {
     //get current snakeHead div's id
-    var $currentDiv = $("div.red")["0"].id;
+    var $currentDiv = $("div.red");
     //create next snakeHead div's id
-    var $nextDiv = "#" + (parseInt($currentDiv) + 1);
+    var $nextDiv = "#" + ($currentDiv.data().id + 1);
 
     //remove current snakeHead div's red class
-    $('#' + $currentDiv).removeClass('red');
+    $($currentDiv).removeClass('red');
     //add red class to next snakeHead div
     $($nextDiv).addClass('red');
 
@@ -54,12 +54,12 @@ function moveRight() {
 
 function moveDown() {
   //get current snakeHead div's id
-  var $currentDiv = $("div.red")["0"].id;
+  var $currentDiv = $("div.red");
   //create next snakeHead div's id
-  var $nextDiv = "#" + (parseInt($currentDiv) + canvasTilesPerRow);
+  var $nextDiv = "#" + ($currentDiv.data().id + canvasTilesPerRow);
 
   //remove current snakeHead div's red class
-  $('#' + $currentDiv).removeClass('red');
+  $($currentDiv).removeClass('red');
   //add red class to next snakeHead div
   $($nextDiv).addClass('red');
   
@@ -69,12 +69,12 @@ function moveDown() {
 
 function moveLeft() {
     //get current snakeHead div's id
-    var $currentDiv = $("div.red")["0"].id;
+    var $currentDiv = $("div.red");
     //create next snakeHead div's id
-    var $nextDiv = "#" + (parseInt($currentDiv) - 1);
+    var $nextDiv = "#" + ($currentDiv.data().id - 1);
 
     //remove current snakeHead div's red class
-    $('#' + $currentDiv).removeClass('red');
+    $($currentDiv).removeClass('red');
     //add red class to next snakeHead div
     $($nextDiv).addClass('red');
     
