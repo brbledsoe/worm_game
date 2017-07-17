@@ -8,15 +8,11 @@
   padding: 4% 29%;
 }
 
-.canvas_col{
+div{
   float: left;
-  background-color: black;
-}
-
-.canvas_col_tile{
-  /*border: 1px solid black;*/
-  padding-top: 100%;
-  width: 100%; 
+ /* background-color: black;*/
+ border: 1px solid black;
+ box-sizing: border-box;
 }
 
 .red{
