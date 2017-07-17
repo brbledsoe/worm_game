@@ -18,7 +18,9 @@ function renderCanvas() {
 
         $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
     }
+
 }
+
 
 function moveUp() {
   //get current snakeHead div's id
@@ -79,6 +81,7 @@ function moveLeft() {
     //change snakeHead's moving direction
     direction = 'left';
 }
+
 
 //new game
 renderCanvas()
