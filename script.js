@@ -1,82 +1,64 @@
 var canvasRows = 40;
 var canvasTilesPerRow = 59;
-var snakeHeadX = 0; //snakeHead x coordinate
-var snakeHeadY = 0; //snakeHead y coordinate
 var direction = 'right';
 var tail = 0;
 
-function renderCanvas() {
-    //empty the current canvas div
-    $('.canvas').empty();
+// function renderCanvas() {
+//     //empty the current canvas div
+//     $('.canvas').empty();
 
-    var tileWidth = 'width:' + 100/canvasTilesPerRow + '%; ';
-    var tileHeight = 'height:' + 100/canvasTilesPerRow + '%;';
-    var tileDimensions = tileWidth + tileHeight;
+//     var tileWidth = 'width:' + 100/canvasTilesPerRow + '%; ';
+//     var tileHeight = 'height:' + 100/canvasTilesPerRow + '%;';
+//     var tileDimensions = tileWidth + tileHeight;
 
-    for (var i = 0; i < canvasRows * canvasTilesPerRow; i++) {
-        var snakeHeadClass = (i === 0) ? 'red' : '';
+//     for (var i = 0; i < canvasRows * canvasTilesPerRow; i++) {
+//         var snakeHeadClass = (i === 0) ? 'red' : '';
 
-        $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
-    }
+//         $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
+//     }
 
-}
+// }
 
+var $currentDiv = $("div.red");
+//will alter $nextDiv based on move function it's in
+var $nextDiv = $currentDiv.data().id; 
+//current Direction snakeHead's a movin
 
 function moveUp() {
-  //get current snakeHead div's id
-  var $currentDiv = $("div.red")["0"].id;
-  //create next snakeHead div's id
-  var $nextDiv = "#" + (parseInt($currentDiv) - canvasTilesPerRow);
-
   //remove current snakeHead div's red class
-  $('#' + $currentDiv).removeClass('red');
+  $($currentDiv).removeClass('red');
   //add red class to next snakeHead div
-  $($nextDiv).addClass('red');
+  $('#' + ($nextDiv - canvasTilesPerRow)).addClass('red');
   
   //change snakeHead's moving direction
   direction = 'up';
 }
 
 function moveRight() {
-    //get current snakeHead div's id
-    var $currentDiv = $("div.red")["0"].id;
-    //create next snakeHead div's id
-    var $nextDiv = "#" + (parseInt($currentDiv) + 1);
-
     //remove current snakeHead div's red class
-    $('#' + $currentDiv).removeClass('red');
+    $($currentDiv).removeClass('red');
     //add red class to next snakeHead div
-    $($nextDiv).addClass('red');
+    $('#' + ($nextDiv + 1)).addClass('red');
 
     //change snakeHead's moving direction
     direction = 'right';
 }
 
 function moveDown() {
-  //get current snakeHead div's id
-  var $currentDiv = $("div.red")["0"].id;
-  //create next snakeHead div's id
-  var $nextDiv = "#" + (parseInt($currentDiv) + canvasTilesPerRow);
-
   //remove current snakeHead div's red class
-  $('#' + $currentDiv).removeClass('red');
+  $($currentDiv).removeClass('red');
   //add red class to next snakeHead div
-  $($nextDiv).addClass('red');
+  $('#' + ($nextDiv + canvasTilesPerRow)).addClass('red');
   
   //change snakeHead's moving direction
   direction = 'down';
 }
 
 function moveLeft() {
-    //get current snakeHead div's id
-    var $currentDiv = $("div.red")["0"].id;
-    //create next snakeHead div's id
-    var $nextDiv = "#" + (parseInt($currentDiv) - 1);
-
     //remove current snakeHead div's red class
-    $('#' + $currentDiv).removeClass('red');
+    $($currentDiv).removeClass('red');
     //add red class to next snakeHead div
-    $($nextDiv).addClass('red');
+    $('#' + ($nextDiv - 1)).addClass('red');
     
     //change snakeHead's moving direction
     direction = 'left';
@@ -84,7 +66,7 @@ function moveLeft() {
 
 
 //new game
-renderCanvas()
+// renderCanvas()
 
 // setInterval(function() {
 //     if (direction === 'up') {
