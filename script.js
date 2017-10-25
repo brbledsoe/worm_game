@@ -1,35 +1,39 @@
 //make canvas
 for(var i = 0; i < 64; i ++){
-  //elem to append
-  var gameTile = '<div id="' + i + '" data-direction ></div>';
-  //append that thang
+  //game tile elems to append
+  var gameTile = '<div id="' + i + '" data-dir"></div>';
+  //append those thangs gur!
   $('.canvas').append(gameTile)
 };
 
-//append head
-// $('#28').append('.head');
+//snake initialize
+$('#28').addClass('snake');
 
 //snake state?
 var snake = {
-  head: undefined,
-  tail: undefined,
+  head: 28,
+  tail: 28,
   length: 0, 
 }
 
-//snake length
-var length = 0;
-
-//------ good ole moven functions ------//
+//------ moven functions ------//
 function moveUp (){
+  console.log('up')
   //get current position of head
-  //add class '.up' to head div
-  //add '.head' to next div
-  //add tail class to next div
-  //remove current tail class
-
+  var currSnaPos = $('#' + snake.head);
+  //get next position of head
+  var nextSnaPos = $('#' + (snake.head - 8));
+  //add next direction class to current div
+  console.log(currSnaPos.data())
+  // currSnaPos.data().dir = 'up'; 
+  //add '.snake' to next div
+  nextSnaPos.addClass('snake');
+  //remove tail class 
+  $('.tail').className = "";
 }
 
 function moveDown (){
+  console.log('down')
   //get current position of head
   //add class '.up' to head div
   //add '.head' to next div
@@ -39,6 +43,7 @@ function moveDown (){
 }
 
 function moveRight (){
+  console.log('right')
   //get current position of head
   //add class '.up' to head div
   //add '.head' to next div
@@ -48,6 +53,7 @@ function moveRight (){
 }
 
 function moveLeft (){
+  console.log('left')
   //get current position of head
   //add class '.up' to head div
   //add '.head' to next div
@@ -56,6 +62,23 @@ function moveLeft (){
 
 }
 
+//------ good ole eevyintz (arrow keys)------//
+$(document).keydown(function(e) {
+
+  switch (e.keyCode) {
+    case 38:
+      moveUp();
+      break;
+    case 40:
+      moveDown();
+      break;
+    case 39:
+      moveRight();
+      break;
+    case 37:
+      moveLeft()
+  }
+});
 
 
 

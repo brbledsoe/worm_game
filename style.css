@@ -18,11 +18,21 @@ div{
   border:1px solid black;
 }
 
-.head{
-  background: tomato;
+/*---- snake classes ----*/
+/*.head{
+  border-radius: 50%;
+  background-color: red;
+}
+
+.body{
+  background-color: tomato;
 }
 
 .tail{
-  background: tomato;
+  background-color: tomato;
+}*/
+
+.snake{
+  background-color: tomato;
 }
 
