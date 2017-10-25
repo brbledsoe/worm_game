@@ -1,113 +1,61 @@
-var canvasRows = 40;
-var canvasTilesPerRow = 59;
-var direction = 'right';
-var tail = 0;
+//make canvas
+for(var i = 0; i < 64; i ++){
+  //elem to append
+  var gameTile = '<div id="' + i + '" data-direction ></div>';
+  //append that thang
+  $('.canvas').append(gameTile)
+};
 
-// function renderCanvas() {
-//     //empty the current canvas div
-//     $('.canvas').empty();
+//append head
+// $('#28').append('.head');
 
-//     var tileWidth = 'width:' + 100/canvasTilesPerRow + '%; ';
-//     var tileHeight = 'height:' + 100/canvasTilesPerRow + '%;';
-//     var tileDimensions = tileWidth + tileHeight;
-
-//     for (var i = 0; i < canvasRows * canvasTilesPerRow; i++) {
-//         var snakeHeadClass = (i === 0) ? 'red' : '';
-
-//         $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
-//     }
-
-// }
-
-var $currentDiv = $("div.red");
-//will alter $nextDiv based on move function it's in
-var $nextDiv = $currentDiv.data().id; 
-//current Direction snakeHead's a movin
-
-function moveUp() {
-  //remove current snakeHead div's red class
-  $($currentDiv).removeClass('red');
-  //add red class to next snakeHead div
-  $('#' + ($nextDiv - canvasTilesPerRow)).addClass('red');
-  
-  //change snakeHead's moving direction
-  direction = 'up';
+//snake state?
+var snake = {
+  head: undefined,
+  tail: undefined,
+  length: 0, 
 }
 
-function moveRight() {
-    //remove current snakeHead div's red class
-    $($currentDiv).removeClass('red');
-    //add red class to next snakeHead div
-    $('#' + ($nextDiv + 1)).addClass('red');
+//snake length
+var length = 0;
 
-    //change snakeHead's moving direction
-    direction = 'right';
+//------ good ole moven functions ------//
+function moveUp (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
 }
 
-function moveDown() {
-  //remove current snakeHead div's red class
-  $($currentDiv).removeClass('red');
-  //add red class to next snakeHead div
-  $('#' + ($nextDiv + canvasTilesPerRow)).addClass('red');
-  
-  //change snakeHead's moving direction
-  direction = 'down';
+function moveDown (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
 }
 
-function moveLeft() {
-    //remove current snakeHead div's red class
-    $($currentDiv).removeClass('red');
-    //add red class to next snakeHead div
-    $('#' + ($nextDiv - 1)).addClass('red');
-    
-    //change snakeHead's moving direction
-    direction = 'left';
+function moveRight (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
+}
+
+function moveLeft (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
 }
 
 
-//new game
-// renderCanvas()
 
-// setInterval(function() {
-//     if (direction === 'up') {
-//         moveUp();
-//     }
-
-//     if (direction === 'right') {
-//         moveRight();
-//     }
-
-//     if (direction === 'down') {
-//         moveDown();
-//     }
-
-//     if (direction === 'left') {
-//         moveLeft();
-//     }
-// }, 1000)
-
-$(document).keydown(function(e) {
-    switch (e.which) {
-        case 37: // left
-            moveLeft();
-            break;
-
-        case 38: // up
-            moveUp();
-            break;
-
-        case 39: // right
-            moveRight();
-            break;
-
-        case 40: // down
-            moveDown();
-            break;
-
-        default:
-            return; // exit this handler for other keys
-    }
-
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-});
 

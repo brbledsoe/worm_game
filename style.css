@@ -5,17 +5,24 @@
 }
 
 .canvas{
-  padding: 4% 29%;
+  width: 30%;
+/*  border: 1px solid red;
+*/  overflow: hidden;
+  margin: 50px auto;
 }
 
 div{
   float: left;
- /* background-color: black;*/
- border: 1px solid black;
- box-sizing: border-box;
+  width: 12.5%;
+  padding-top:12.5%;
+  border:1px solid black;
 }
 
-.red{
+.head{
+  background: tomato;
+}
+
+.tail{
   background: tomato;
 }
 
