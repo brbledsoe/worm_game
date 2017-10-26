@@ -1,7 +1,7 @@
 //make canvas
 for(var i = 0; i < 64; i ++){
   //game tile elems to append
-  var gameTile = '<div id="' + i + '" data-dir"></div>';
+  var gameTile = '<div id="' + i + '" data-dir></div>';
   //append those thangs gur!
   $('.canvas').append(gameTile);
 
@@ -10,9 +10,9 @@ for(var i = 0; i < 64; i ++){
 //snake state?
 var snake = {
   head: 28,
-  tail: 28,
-  length: 0
-
+  tail: 36,
+  length: 1,
+  moves: 0
 }
 
 //snake initialize
@@ -28,9 +28,20 @@ function moveUp (){
   //add snake head to next div 
   $('#' + snake.head).addClass('snake')
   //remove tail class 
-  $('#' + snake.tail).className = " ";
+  $('#' + snake.tail).attr('class','');
   //update snake tail
   snake.tail -= 8;
+  //add snake tail to next div
+  $('#' + snake.tail).addClass('snake');
+
+
+
+  //if snake length greater than 0 do some stuff
+  if(snake.length){
+    
+  }
+  
+
 
 }
 
@@ -60,6 +71,7 @@ function moveLeft (){
   //remove current tail class
 
 }
+
 
 //------ good ole eevyintz (arrow keys)------//
 $(document).keydown(function(e) {
