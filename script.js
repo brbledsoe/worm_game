@@ -1,113 +1,95 @@
-var canvasRows = 40;
-var canvasTilesPerRow = 59;
-var direction = 'right';
-var tail = 0;
+//make canvas
+for(var i = 0; i < 64; i ++){
+  //game tile elems to append
+  var gameTile = '<div id="' + i + '" data-dir></div>';
+  //append those thangs gur!
+  $('.canvas').append(gameTile);
 
-// function renderCanvas() {
-//     //empty the current canvas div
-//     $('.canvas').empty();
+};
 
-//     var tileWidth = 'width:' + 100/canvasTilesPerRow + '%; ';
-//     var tileHeight = 'height:' + 100/canvasTilesPerRow + '%;';
-//     var tileDimensions = tileWidth + tileHeight;
-
-//     for (var i = 0; i < canvasRows * canvasTilesPerRow; i++) {
-//         var snakeHeadClass = (i === 0) ? 'red' : '';
-
-//         $('.canvas').append('<div class="canvas_tile ' + snakeHeadClass + '" id="' + i + '" style="' + tileDimensions + '"></div>');
-//     }
-
-// }
-
-var $currentDiv = $("div.red");
-//will alter $nextDiv based on move function it's in
-var $nextDiv = $currentDiv.data().id; 
-//current Direction snakeHead's a movin
-
-function moveUp() {
-  //remove current snakeHead div's red class
-  $($currentDiv).removeClass('red');
-  //add red class to next snakeHead div
-  $('#' + ($nextDiv - canvasTilesPerRow)).addClass('red');
-  
-  //change snakeHead's moving direction
-  direction = 'up';
+//snake state?
+var snake = {
+  head: 28,
+  tail: 36,
+  length: 1,
+  moves: 0
 }
 
-function moveRight() {
-    //remove current snakeHead div's red class
-    $($currentDiv).removeClass('red');
-    //add red class to next snakeHead div
-    $('#' + ($nextDiv + 1)).addClass('red');
+//snake initialize
+$('#' + snake.head).addClass('snake');
+$('#' + snake.tail).addClass('snake');
 
-    //change snakeHead's moving direction
-    direction = 'right';
-}
+//------ moven functions ------//
+function moveUp (){
+  //add next direction to current div
+  $('#' + snake.head).data().dir = 'up'; 
+  //update snake head
+  snake.head -= 8;
+  //add snake head to next div 
+  $('#' + snake.head).addClass('snake')
+  //remove tail class 
+  $('#' + snake.tail).attr('class','');
+  //update snake tail
+  snake.tail -= 8;
+  //add snake tail to next div
+  $('#' + snake.tail).addClass('snake');
 
-function moveDown() {
-  //remove current snakeHead div's red class
-  $($currentDiv).removeClass('red');
-  //add red class to next snakeHead div
-  $('#' + ($nextDiv + canvasTilesPerRow)).addClass('red');
-  
-  //change snakeHead's moving direction
-  direction = 'down';
-}
 
-function moveLeft() {
-    //remove current snakeHead div's red class
-    $($currentDiv).removeClass('red');
-    //add red class to next snakeHead div
-    $('#' + ($nextDiv - 1)).addClass('red');
+
+  //if snake length greater than 0 do some stuff
+  if(snake.length){
     
-    //change snakeHead's moving direction
-    direction = 'left';
+  }
+  
+
+
+}
+
+function moveDown (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
+}
+
+function moveRight (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
+}
+
+function moveLeft (){
+  //get current position of head
+  //add class '.up' to head div
+  //add '.head' to next div
+  //add tail class to next div
+  //remove current tail class
+
 }
 
 
-//new game
-// renderCanvas()
-
-// setInterval(function() {
-//     if (direction === 'up') {
-//         moveUp();
-//     }
-
-//     if (direction === 'right') {
-//         moveRight();
-//     }
-
-//     if (direction === 'down') {
-//         moveDown();
-//     }
-
-//     if (direction === 'left') {
-//         moveLeft();
-//     }
-// }, 1000)
-
+//------ good ole eevyintz (arrow keys)------//
 $(document).keydown(function(e) {
-    switch (e.which) {
-        case 37: // left
-            moveLeft();
-            break;
+  switch (e.keyCode) {
+    case 38:
+      moveUp();
+      break;
+    case 40:
+      moveDown();
+      break;
+    case 39:
+      moveRight();
+      break;
+    case 37:
+      moveLeft()
+  }
 
-        case 38: // up
-            moveUp();
-            break;
-
-        case 39: // right
-            moveRight();
-            break;
-
-        case 40: // down
-            moveDown();
-            break;
-
-        default:
-            return; // exit this handler for other keys
-    }
-
-    e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+
 
