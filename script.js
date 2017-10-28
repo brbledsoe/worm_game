@@ -12,7 +12,8 @@ var snake = {
   head: 28,
   tail: 36,
   length: 1,
-  moves: 0
+  moves: 0,
+  grow: false
 }
 
 //snake initialize
@@ -33,11 +34,14 @@ function moveUp (){
   snake.tail -= 8;
   //add snake tail to next div
   $('#' + snake.tail).addClass('snake');
-
-
-
-  //if snake length greater than 0 do some stuff
-  if(snake.length){
+  //if snake length greater than 0 don't delete tail for one round
+  // if(snake.length){
+    
+  // }
+  //if snake.grow is true don't delete tail, otherwise delete the tail
+  if(snake.grow){
+    
+  }else{
     
   }
   
