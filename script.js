@@ -1,5 +1,8 @@
+//canvas width
+var canvWidth = 8;
+
 //make canvas
-for(var i = 0; i < 64; i ++){
+for(var i = 0; i < (canvWidth * canvWidth); i ++){
   //game tile elems to append
   var gameTile = '<div id="' + i + '" data-dir></div>';
   //append those thangs gur!
@@ -8,68 +11,128 @@ for(var i = 0; i < 64; i ++){
 };
 
 //snake state?
-var snake = {
-  head: 28,
-  tail: 36,
-  length: 1,
-  moves: 0
-}
+// var snake = {
+//   head: 28,
+//   tail: 36,
+//   length: 1,
+//   moves: 0,
+//   grow: false
+// }
+
+//snake's initial representation — snake[0] is head, snake[snake.length - 1] is tail
+var snake = [28, 36];
+
+//flag that represents if the snake should grow
+var grow = false;
+
 
 //snake initialize
-$('#' + snake.head).addClass('snake');
-$('#' + snake.tail).addClass('snake');
+$('#' + snake[0]).addClass('snake');
+$('#' + snake[snake.length - 1]).addClass('snake');
 
-//------ moven functions ------//
+//------ moven'round functions ------//
 function moveUp (){
-  //add next direction to current div
-  $('#' + snake.head).data().dir = 'up'; 
-  //update snake head
-  snake.head -= 8;
-  //add snake head to next div 
-  $('#' + snake.head).addClass('snake')
-  //remove tail class 
-  $('#' + snake.tail).attr('class','');
-  //update snake tail
-  snake.tail -= 8;
-  //add snake tail to next div
-  $('#' + snake.tail).addClass('snake');
-
-
-
-  //if snake length greater than 0 do some stuff
-  if(snake.length){
-    
+  //if not growing remove tail, else remove tail
+  if(!grow){
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] - canvWidth);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //remove snake tail on DOM
+    $('#' + snake[snake.length - 1]).removeClass('snake');
+    //remove snake tail on array
+    snake.pop();
+  }else{
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] - canvWidth);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //change grow back to false
+    grow = false
   }
-  
 
+  console.clear()
+  console.log(snake)
 
 }
 
 function moveDown (){
-  //get current position of head
-  //add class '.up' to head div
-  //add '.head' to next div
-  //add tail class to next div
-  //remove current tail class
+  //if not growing remove tail, else remove tail
+  if(!grow){
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] + canvWidth);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //remove snake tail on DOM
+    $('#' + snake[snake.length - 1]).removeClass('snake');
+    //remove snake tail on array
+    snake.pop();
+  }else{
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] + canvWidth);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //change grow back to false
+    grow = false
+  }
+
+  console.clear()
+  console.log(snake)
 
 }
 
 function moveRight (){
-  //get current position of head
-  //add class '.up' to head div
-  //add '.head' to next div
-  //add tail class to next div
-  //remove current tail class
+  //if not growing remove tail, else remove tail
+  if(!grow){
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] + 1);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //remove snake tail on DOM
+    $('#' + snake[snake.length - 1]).removeClass('snake');
+    //remove snake tail on array
+    snake.pop();
+  }else{
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] + 1);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //change grow back to false
+    grow = false
+  }
+
+  console.clear()
+  console.log(snake)
+
+} 
+
+function moveLeft (){
+  //if not growing remove tail, else remove tail
+  if(!grow){
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] - 1);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //remove snake tail on DOM
+    $('#' + snake[snake.length - 1]).removeClass('snake');
+    //remove snake tail on array
+    snake.pop();
+  }else{
+    //add new snake head to beginning of snake array
+    snake.unshift(snake[0] - 1);
+    //update snake head on DOM
+    $('#' + snake[0]).addClass('snake');
+    //change grow back to false
+    grow = false
+  }
+
+  console.clear()
+  console.log(snake)
 
 }
 
-function moveLeft (){
-  //get current position of head
-  //add class '.up' to head div
-  //add '.head' to next div
-  //add tail class to next div
-  //remove current tail class
-
+function toggleGrow (){
+  grow = true;
 }
 
 
@@ -86,7 +149,10 @@ $(document).keydown(function(e) {
       moveRight();
       break;
     case 37:
-      moveLeft()
+      moveLeft();
+      break;
+    case 13:
+      toggleGrow();
   }
 
 });
