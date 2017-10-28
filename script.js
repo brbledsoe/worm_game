@@ -104,7 +104,7 @@ function moveRight (){
   console.clear()
   console.log(snake)
 
-}
+} 
 
 function moveLeft (){
   //if not growing remove tail, else remove tail
