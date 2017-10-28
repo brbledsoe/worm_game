@@ -1,5 +1,8 @@
+//canvas width
+var canvWidth = 8;
+
 //make canvas
-for(var i = 0; i < 64; i ++){
+for(var i = 0; i < (canvWidth * canvWidth); i ++){
   //game tile elems to append
   var gameTile = '<div id="' + i + '" data-dir></div>';
   //append those thangs gur!
@@ -32,7 +35,7 @@ function moveUp (){
   //if not growing remove tail, else remove tail
   if(!grow){
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] - 8);
+    snake.unshift(snake[0] - canvWidth);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //remove snake tail on DOM
@@ -41,7 +44,7 @@ function moveUp (){
     snake.pop();
   }else{
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] - 8);
+    snake.unshift(snake[0] - canvWidth);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
@@ -57,7 +60,7 @@ function moveDown (){
   //if not growing remove tail, else remove tail
   if(!grow){
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] + 8);
+    snake.unshift(snake[0] + canvWidth);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //remove snake tail on DOM
@@ -66,7 +69,7 @@ function moveDown (){
     snake.pop();
   }else{
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] - 8);
+    snake.unshift(snake[0] + canvWidth);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
@@ -91,7 +94,7 @@ function moveRight (){
     snake.pop();
   }else{
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] - 8);
+    snake.unshift(snake[0] + 1);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
@@ -116,7 +119,7 @@ function moveLeft (){
     snake.pop();
   }else{
     //add new snake head to beginning of snake array
-    snake.unshift(snake[0] - 8);
+    snake.unshift(snake[0] - 1);
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
