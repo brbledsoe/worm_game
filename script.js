@@ -42,9 +42,6 @@ function moveUp (){
 
   }
   
-  //go to next move
-  //delete apple 
-  //then grow snake
 
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
@@ -72,6 +69,14 @@ function moveUp (){
     grow = false
   }
 
+  //if next movement is an apple
+  //idea is if change toggleGrow changes to true this ground, on the next round grow snake
+  if($('#' + snake[0]).hasClass('apple')){
+    console.log('yo')
+    $('.apple').removeClass('apple');
+    toggleGrow()
+  }
+  
   snakeDirection = 'up';
 
   // console.clear()
@@ -115,6 +120,14 @@ function moveDown (){
     grow = false
   }
 
+  //if next movement is an apple
+  //idea is if change toggleGrow changes to true this ground, on the next round grow snake
+  if($('#' + snake[0]).hasClass('apple')){
+    console.log('yo')
+    $('.apple').removeClass('apple');
+    toggleGrow()
+  }
+
   snakeDirection = 'down';
 
   // console.clear()
@@ -125,14 +138,13 @@ function moveDown (){
 function moveRight (){
   var nextTile = $('#' + (snake[0] + 1));
 
-  //if next movement is an apple
-  if(nextTile.hasClass('apple')){
-    toggleGrow();
-  }
+  //if current movement is an apple
+  // if($('#' + snake[0]).hasClass('apple')){
+  //   console.log('growing');
+  //   $('#' + snake[0]).removeClass('apple');
+  //   toggleGrow();
+  // }
 
-  //go to next move
-  //delete apple 
-  //then grow snake
 
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
@@ -157,7 +169,15 @@ function moveRight (){
     //update snake head on DOM
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
-    grow = false
+    grow = false;
+  }
+
+  //if next movement is an apple
+  //idea is if change toggleGrow changes to true this ground, on the next round grow snake
+  if($('#' + snake[0]).hasClass('apple')){
+    console.log('yo')
+    $('.apple').removeClass('apple');
+    toggleGrow()
   }
 
   snakeDirection = 'right';
@@ -203,6 +223,14 @@ function moveLeft (){
     $('#' + snake[0]).addClass('snake');
     //change grow back to false
     grow = false
+  }
+
+  //if next movement is an apple
+  //idea is if change toggleGrow changes to true this ground, on the next round grow snake
+  if($('#' + snake[0]).hasClass('apple')){
+    console.log('yo')
+    $('.apple').removeClass('apple');
+    toggleGrow()
   }
 
   snakeDirection = 'left';
