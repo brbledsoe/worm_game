@@ -1,3 +1,4 @@
+//------ INITIAL VARS & FUNCS ------//
 //canvas width
 var canvWidth = 8;
 
@@ -10,19 +11,23 @@ for(var i = 1; i < (canvWidth * canvWidth + 1); i ++){
 
 };
 
-
 //snake's initial representation — snake[0] is head, snake[snake.length - 1] is tail
 var snake = [28, 36];
 
 //flag that represents if the snake should grow
 var grow = false;
 
+//speed of snake's auto movement
+var snakeSpeed = 1000;
 
-//snake initialize
+//the direction snake is headed
+var snakeDirection = 'up';
+
+//snake initialize (head on top, tail below)
 $('#' + snake[0]).addClass('snake');
 $('#' + snake[snake.length - 1]).addClass('snake');
 
-//------ moven'round functions ------//
+//------ MOVEN'ROUND FUNCTIONS ------//
 function moveUp (){
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
@@ -49,6 +54,8 @@ function moveUp (){
     //change grow back to false
     grow = false
   }
+
+  snakeDirection = 'up';
 
   console.clear()
   console.log(snake)
@@ -82,6 +89,8 @@ function moveDown (){
     grow = false
   }
 
+  snakeDirection = 'down';
+
   console.clear()
   console.log(snake)
 
@@ -113,6 +122,8 @@ function moveRight (){
     //change grow back to false
     grow = false
   }
+
+  snakeDirection = 'right';
 
   console.clear()
   console.log(snake)
@@ -146,17 +157,69 @@ function moveLeft (){
     grow = false
   }
 
+  snakeDirection = 'left';
+
   console.clear()
   console.log(snake)
 
 }
 
+function autoMove (){
+  switch (snakeDirection) {
+    case 'up':
+      //do not allow snake to go out of bounds
+      //(later versions might end game if this happens)
+      if((snake[0] - canvWidth) < 0){
+        moveRight();
+        snakeDirection = 'right';
+        break;
+      }else{
+        moveUp(); 
+        break;
+      }
+    case 'down':
+      //do not allow snake to go out of bounds
+      //(later versions might end game if this happens)
+      if((snake[0] + canvWidth) > (canvWidth * canvWidth)){
+        moveLeft();
+        snakeDirection = 'left';
+        break;
+      }else{
+        moveDown();
+        break;
+      }
+    case 'right':
+      //do not allow snake to go out of bounds
+      //(later versions might end game if this happens)
+      if(snake[0]%8 == 0){
+        moveDown();
+        snakeDirection = 'down';
+        break;
+      }else{
+        moveRight();
+        break;
+      }
+    case 'left':
+      //do not allow snake to go out of bounds
+      //(later versions might end game if this happens)
+      if((snake[0]-1)%8 == 0){
+        moveUp();
+        snakeDirection = 'up';
+      }else{
+        moveLeft();
+      }
+  }
+}
+
+//------ AAAAUTO MOVEMENT ------//
+setInterval(autoMove,snakeSpeed);
+
+//------ GROWTH FUNCTIONS ------//
 function toggleGrow (){
   grow = true;
 }
 
-
-//------ good ole eevyintz (arrow keys)------//
+//------ GOOD OLE EEVYINTZ (ARROW KEYS)------//
 $(document).keydown(function(e) {
   switch (e.keyCode) {
     case 38:
