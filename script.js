@@ -27,8 +27,25 @@ var snakeDirection = 'up';
 $('#' + snake[0]).addClass('snake');
 $('#' + snake[snake.length - 1]).addClass('snake');
 
+//apple initialize
+$('#15').addClass('apple');
+
 //------ MOVEN'ROUND FUNCTIONS ------//
 function moveUp (){
+  var nextTile = $('#' + (snake[0] - canvWidth));
+
+  //if next movement is an apple
+  if(nextTile.hasClass('apple')){
+
+    toggleGrow();
+    $('.apple').removeClass('apple');
+
+  }
+  
+  //go to next move
+  //delete apple 
+  //then grow snake
+
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
   if((snake[0] - canvWidth) < 0){
@@ -57,12 +74,21 @@ function moveUp (){
 
   snakeDirection = 'up';
 
-  console.clear()
-  console.log(snake)
+  // console.clear()
+  // console.log(snake)
 
 }
 
 function moveDown (){
+  var nextTile = $('#' + (snake[0] + canvWidth));
+  //if next movement is an apple
+  if(nextTile.hasClass('apple')){
+    toggleGrow();
+  }
+  //go to next move
+  //delete apple 
+  //then grow snake
+
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
   if((snake[0] + canvWidth) > (canvWidth * canvWidth)){
@@ -91,12 +117,23 @@ function moveDown (){
 
   snakeDirection = 'down';
 
-  console.clear()
-  console.log(snake)
+  // console.clear()
+  // console.log(snake)
 
 }
 
 function moveRight (){
+  var nextTile = $('#' + (snake[0] + 1));
+
+  //if next movement is an apple
+  if(nextTile.hasClass('apple')){
+    toggleGrow();
+  }
+
+  //go to next move
+  //delete apple 
+  //then grow snake
+
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
   if(snake[0]%8 == 0){
@@ -125,12 +162,23 @@ function moveRight (){
 
   snakeDirection = 'right';
 
-  console.clear()
-  console.log(snake)
+  // console.clear()
+  // console.log(snake)
 
 } 
 
 function moveLeft (){
+  var nextTile = $('#' + (snake[0] - canvWidth));
+
+  //if next movement is an apple
+  if(nextTile.hasClass('apple')){
+    toggleGrow();
+  }
+
+  //go to next move
+  //delete apple 
+  //then grow snake
+
   //do not allow snake to go out of bounds
   //(later versions might end game if this happens)
   if((snake[0]-1)%8 == 0){
@@ -159,8 +207,8 @@ function moveLeft (){
 
   snakeDirection = 'left';
 
-  console.clear()
-  console.log(snake)
+  // console.clear()
+  // console.log(snake)
 
 }
 
@@ -211,15 +259,7 @@ function autoMove (){
   }
 }
 
-//------ AAAAUTO MOVEMENT ------//
-setInterval(autoMove,snakeSpeed);
-
-//------ GROWTH FUNCTIONS ------//
-function toggleGrow (){
-  grow = true;
-}
-
-//------ GOOD OLE EEVYINTZ (ARROW KEYS)------//
+//------ GOOD OLE MOVEN EEVYINTZ (ARROW KEYS)------//
 $(document).keydown(function(e) {
   switch (e.keyCode) {
     case 38:
@@ -238,6 +278,20 @@ $(document).keydown(function(e) {
       toggleGrow();
   }
 });
+
+//------ AAAAUTO MOVEMENT ------//
+// setInterval(autoMove,snakeSpeed);
+
+//------ APPLE APPEARANCE AND SNAKE-GROWTH FUNCTIONS ------//
+
+function toggleGrow (){
+  grow = true;
+}
+
+
+
+
+
 
 
 
