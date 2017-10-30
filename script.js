@@ -33,14 +33,6 @@ $('#15').addClass('apple');
 //------ MOVEN'ROUND FUNCTIONS ------//
 function moveUp (){
   var nextTile = $('#' + (snake[0] - canvWidth));
-
-  //if next movement is an apple
-  if(nextTile.hasClass('apple')){
-
-    toggleGrow();
-    $('.apple').removeClass('apple');
-
-  }
   
 
   //do not allow snake to go out of bounds
@@ -74,7 +66,8 @@ function moveUp (){
   if($('#' + snake[0]).hasClass('apple')){
     console.log('yo')
     $('.apple').removeClass('apple');
-    toggleGrow()
+    throwApple();
+    toggleGrow();
   }
   
   snakeDirection = 'up';
@@ -125,7 +118,8 @@ function moveDown (){
   if($('#' + snake[0]).hasClass('apple')){
     console.log('yo')
     $('.apple').removeClass('apple');
-    toggleGrow()
+    throwApple();
+    toggleGrow();
   }
 
   snakeDirection = 'down';
@@ -177,7 +171,8 @@ function moveRight (){
   if($('#' + snake[0]).hasClass('apple')){
     console.log('yo')
     $('.apple').removeClass('apple');
-    toggleGrow()
+    throwApple();
+    toggleGrow();
   }
 
   snakeDirection = 'right';
@@ -230,7 +225,8 @@ function moveLeft (){
   if($('#' + snake[0]).hasClass('apple')){
     console.log('yo')
     $('.apple').removeClass('apple');
-    toggleGrow()
+    throwApple();
+    toggleGrow();
   }
 
   snakeDirection = 'left';
@@ -308,9 +304,19 @@ $(document).keydown(function(e) {
 });
 
 //------ AAAAUTO MOVEMENT ------//
-// setInterval(autoMove,snakeSpeed);
+setInterval(autoMove,snakeSpeed);
 
 //------ APPLE APPEARANCE AND SNAKE-GROWTH FUNCTIONS ------//
+function throwApple (){
+ var apple = snake[0];
+
+ while(snake.includes(apple)){
+    apple = Math.floor(Math.random() * (canvWidth * canvWidth)) + 1;
+  }
+
+  $('#' + apple).addClass('apple');
+
+}
 
 function toggleGrow (){
   grow = true;
